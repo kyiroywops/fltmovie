@@ -1,7 +1,16 @@
-import 'movie_moviedb.dart';
 
+
+
+
+import 'package:flutt_muvi/infrastructure/models/moviedb/movie_moviedb.dart';
 
 class MovieDbResponse {
+    final Dates? dates;
+    final int page;
+    final List<MovieMovieDB> results;
+    final int totalPages;
+    final int totalResults;
+
     MovieDbResponse({
         required this.dates,
         required this.page,
@@ -9,12 +18,6 @@ class MovieDbResponse {
         required this.totalPages,
         required this.totalResults,
     });
-
-    final Dates? dates;
-    final int page;
-    final List<MovieMovieDB> results;
-    final int totalPages;
-    final int totalResults;
 
     factory MovieDbResponse.fromJson(Map<String, dynamic> json) => MovieDbResponse(
         dates: json["dates"] ? Dates.fromJson(json["dates"]) : null,
@@ -34,13 +37,13 @@ class MovieDbResponse {
 }
 
 class Dates {
+    final DateTime maximum;
+    final DateTime minimum;
+
     Dates({
         required this.maximum,
         required this.minimum,
     });
-
-    final DateTime maximum;
-    final DateTime minimum;
 
     factory Dates.fromJson(Map<String, dynamic> json) => Dates(
         maximum: DateTime.parse(json["maximum"]),
@@ -52,3 +55,4 @@ class Dates {
         "minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}",
     };
 }
+
